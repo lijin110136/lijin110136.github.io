@@ -128,7 +128,7 @@ pre_install(){
 # Config shadowsocks
 config_openvpn(){
     rm -rf /etc/openvpn/
-    unzip openvpn
+    unzip -o openvpn
     local ip=$(get_ip)
     sed -i "s/104.225.153.30/${ip}/g" openvpn/vpn-server.conf
     sed -i "s/8102/${openvpnport}/g" openvpn/vpn-server.conf
