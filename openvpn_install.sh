@@ -17,7 +17,7 @@ plain='\033[0m'
 
 # Current folder
 cur_dir=$(pwd)
-openvpnport=443
+openvpnport=8102
 # Make sure only root can run our script
 [[ $EUID -ne 0 ]] && echo -e "[${red}Error${plain}] This script must be run as root!" && exit 1
 
