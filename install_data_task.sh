@@ -18,6 +18,7 @@ cur_dir=$(pwd)
 [[ $EUID -ne 0 ]] && echo -e "[${red}Error${plain}] This script must be run as root!" && exit 1
 
 download_software(){
+    yum install -y -q net-tools
     cd /root/
     mkdir data_collect
     cd data_collect
