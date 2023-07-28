@@ -30,9 +30,12 @@ download_software(){
 # Config shadowsocks
 install_task(){
 
-    # 动态删除crontab任务
-    sed -i '/collect_server_data/d' /var/spool/cron/root
-
+    if [ -f /var/spool/cron/root ] 
+    then
+        # 动态删除crontab任务
+        sed -i '/collect_server_data/d' /var/spool/cron/root
+    fi
+    
     # 动态添加crontab任务
     echo "*/1 * * * * cd /root/data_collect;sh collect_server_data.sh>>/tmp/data_collect.log" >> /var/spool/cron/root
     echo "添加crontab任务完成!"
