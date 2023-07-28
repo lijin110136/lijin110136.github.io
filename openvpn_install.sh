@@ -168,7 +168,7 @@ firewall_set(){
         iptables -t nat -A POSTROUTING -s 10.8.0.0/24  -j MASQUERADE
         iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
         iptables -I FORWARD -j ACCEPT
-        iptables-save
+        echo "iptable set success"
     fi
     echo -e "[${green}Info${plain}] firewall set completed..."
 }
