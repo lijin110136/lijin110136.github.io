@@ -4,6 +4,7 @@
 import sys
 import json
 import urllib2
+import urllib
 
 def main():
     data = parse()
@@ -28,8 +29,9 @@ def parse():
 def report(data):
     if data :
         headers = {'Content-Type': 'application/json'}
-        url='https://feedapihk.zhangxinhulian.com/data/api/saveVpsJson?zygt=hzwz&tgtk=1&bodyStr='
-        req = urllib2.Request(url=url, bodyStr=data, headers=headers)
+        url="https://feedapihk.zhangxinhulian.com/data/api/saveVpsJson?zygt=hzwz&tgtk=1&{}".format(urllib.urlencode({'bodyStr': data}))
+        print("请求URL：" + url)
+        req = urllib2.Request(url=url, headers=headers)
         res = urllib2.urlopen(req)
         res = res.read()
         print(res)

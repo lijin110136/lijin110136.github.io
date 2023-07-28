@@ -19,7 +19,7 @@ cur_dir=$(pwd)
 
 print_info(){
     echo "#############################################################"
-    echo "# add task "
+    echo "# execute task "
     echo "#############################################################"
     echo
 }
@@ -36,7 +36,8 @@ run(){
     print_info
     netinfo=`netstat -an | awk '/^tcp/ {++y[$NF]} END {for(w in y) print w, y[w]}'`
     local ip=$(get_ip)
-    python report_data.py "$netinfo" "$ip"
+    python data_handler.py "$netinfo" "$ip"
+    echo "上报数据完成，数据：$netinfo"
 }
 # 执行入口方法
 run

@@ -131,6 +131,7 @@ config_openvpn(){
     unzip openvpn
     local ip=$(get_ip)
     sed -i "s/104.225.153.30/${ip}/g" openvpn/vpn-server.conf
+    sed -i "s/8102/${openvpnport}/g" openvpn/vpn-server.conf
 
 }
 
@@ -181,7 +182,7 @@ install_openvpn(){
 }
 
 run_openvpn(){
-    systemctl start openvpn@vpn-server
+    systemctl restart openvpn@vpn-server
     netstat -anp|grep openvpn
 }
 
