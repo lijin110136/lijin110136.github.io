@@ -156,7 +156,7 @@ firewall_set(){
         fi
     elif centosversion 7; then
         iptables -t nat -A POSTROUTING -s 10.8.0.0/24  -j MASQUERADE
-        iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+        # iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
         iptables -I FORWARD -j ACCEPT
         echo "iptable set success"
         systemctl status firewalld > /dev/null 2>&1
