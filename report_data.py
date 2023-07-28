@@ -28,15 +28,14 @@ def parse():
 def report(data):
     if data :
         headers = {'Content-Type': 'application/json'}
-        url='http://192.168.7.160/ipc_moudle/sysUser/login/'
-        req = urllib2.Request(url=url, data=data, headers=headers)
+        url='https://feedapihk.zhangxinhulian.com/data/api/saveVpsJson?zygt=hzwz&tgtk=1&bodyStr='
+        req = urllib2.Request(url=url, bodyStr=data, headers=headers)
         res = urllib2.urlopen(req)
         res = res.read()
         print(res)
 
 if __name__ == "__main__":
     main()
-
 
 
 

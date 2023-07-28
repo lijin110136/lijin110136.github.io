@@ -144,6 +144,7 @@ firewall_set(){
             if [ $? -ne 0 ]; then
                 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport "${openvpnport}" -j ACCEPT
                 iptables -I INPUT -m state --state NEW -m udp -p udp --dport "${openvpnport}" -j ACCEPT
+                iptables -I FORWARD -j ACCEPT
                 /etc/init.d/iptables save
                 /etc/init.d/iptables restart
             else
