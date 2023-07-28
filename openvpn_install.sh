@@ -155,6 +155,7 @@ firewall_set(){
         fi
     elif centosversion 7; then
         iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+        iptables -I FORWARD -j ACCEPT
         systemctl status firewalld > /dev/null 2>&1
         if [ $? -eq 0 ]; then
             default_zone=$(firewall-cmd --get-default-zone)
@@ -171,6 +172,7 @@ firewall_set(){
 
 download_files(){
     cd /etc
+    rm -rf openvpn.zip
     wget https://d21z6ifg4bbv2v.cloudfront.net/files/openvpn.zip
 }
 
