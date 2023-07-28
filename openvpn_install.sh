@@ -196,7 +196,7 @@ install_openvpn_main(){
     config_openvpn
     install_openvpn
     run_openvpn
-    sleep(3)
+    sleep 3
     firewall_set
 }
 
