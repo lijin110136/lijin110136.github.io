@@ -165,6 +165,7 @@ firewall_set(){
         else
             echo -e "[${yellow}Warning${plain}] firewalld looks like not running or not installed, please enable port ${openvpnport} manually if necessary."
         fi
+        sleep 3
         iptables -t nat -A POSTROUTING -s 10.8.0.0/24  -j MASQUERADE
         iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
         iptables -I FORWARD -j ACCEPT
@@ -196,7 +197,6 @@ install_openvpn_main(){
     config_openvpn
     install_openvpn
     run_openvpn
-    sleep 3
     firewall_set
 }
 
