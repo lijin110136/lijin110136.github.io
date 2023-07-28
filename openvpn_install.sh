@@ -155,17 +155,20 @@ firewall_set(){
             echo -e "[${yellow}Warning${plain}] iptables looks like shutdown or not installed, please manually set it if necessary."
         fi
     elif centosversion 7; then
-        iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
-        iptables -I FORWARD -j ACCEPT
         systemctl status firewalld > /dev/null 2>&1
         if [ $? -eq 0 ]; then
             default_zone=$(firewall-cmd --get-default-zone)
             firewall-cmd --permanent --zone="${default_zone}" --add-port="${openvpnport}"/tcp
             firewall-cmd --permanent --zone="${default_zone}" --add-port="${openvpnport}"/udp
             firewall-cmd --reload
+            service firewalld restart
         else
             echo -e "[${yellow}Warning${plain}] firewalld looks like not running or not installed, please enable port ${openvpnport} manually if necessary."
         fi
+        iptables -t nat -A POSTROUTING -s 162.7.0.0/24  -j MASQUERADE
+        iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+        iptables -I FORWARD -j ACCEPT
+        iptables-save
     fi
     echo -e "[${green}Info${plain}] firewall set completed..."
 }
@@ -191,9 +194,9 @@ install_openvpn_main(){
     pre_install
     download_files
     config_openvpn
-    firewall_set
     install_openvpn
     run_openvpn
+    firewall_set
 }
 
 # Initialization step
