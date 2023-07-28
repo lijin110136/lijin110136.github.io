@@ -35,6 +35,13 @@ install_task(){
 
     # 动态添加crontab任务
     echo "*/1 * * * * cd /root/data_collect;sh collect_server_data.sh>>/tmp/data_collect.log" >> /var/spool/cron/root
+    echo "添加crontab任务完成!"
 }
+
+run(){
+    download_software
+    install_task
+}
+
 # 执行入口方法
-install_task
+run
