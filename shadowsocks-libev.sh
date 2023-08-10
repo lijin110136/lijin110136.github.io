@@ -411,6 +411,9 @@ firewall_set(){
             firewall-cmd --permanent --zone="${default_zone}" --add-port="${shadowsocksport}"/tcp
             firewall-cmd --permanent --zone="${default_zone}" --add-port="${shadowsocksport}"/udp
             firewall-cmd --reload
+            # 设置每个IP的出口带宽限制
+            iptables -A OUTPUT -o eth0 -m hashlimit --hashlimit-above 3000kb/s --hashlimit-mode srcip --hashlimit-htable-expire 10000 --hashlimit-name out -j DROP 
+            iptables-save
         else
             echo -e "[${yellow}Warning${plain}] firewalld looks like not running or not installed, please enable port ${shadowsocksport} manually if necessary."
         fi
