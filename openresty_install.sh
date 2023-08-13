@@ -1,7 +1,7 @@
 
- 
+
 # 第一个参数为 OpenResty 的版本号
-VERSION=$1
+VERSION=1.21.4.2
 OPENRESTY_FILE="openresty-${VERSION}.tar.gz"
 OPENRESTY_URL="https://openresty.org/download/${OPENRESTY_FILE}"
 INSTALL_DIR="/data/openresty"
@@ -20,19 +20,9 @@ if [ ! -f "$OPENRESTY_FILE" ]; then
   fi
 fi
  
- 
-# 提取 MD5 值并检查是否匹配
-EXPECTED_MD5=$(cat "${OPENRESTY_FILE}.md5" | awk '{ print $1 }')
-ACTUAL_MD5=$(md5sum "$OPENRESTY_FILE" | awk '{ print $1 }')
-if [ "$EXPECTED_MD5" != "$ACTUAL_MD5" ]; then
-  echo "下载的 ${OPENRESTY_FILE} 文件的 MD5 值不匹配"
-  exit 1
-fi
- 
- 
 # 安装依赖
 yum install -y gcc make pcre-devel openssl-devel
- 
+
  
 # 解压并编译安装 OpenResty
 tar -xzvf "$OPENRESTY_FILE"
