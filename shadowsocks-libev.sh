@@ -262,7 +262,7 @@ pre_install(){
     fi
 
     # Set shadowsocks-libev config password
-    shadowsockspwd="test@123"
+    shadowsockspwd="www123ccc"
     echo
     echo "---------------------------"
     echo "password = ${shadowsockspwd}"
@@ -270,7 +270,7 @@ pre_install(){
     echo
 
     # Set shadowsocks-libev config port
-    dport=8199
+    dport=8050
     shadowsocksport=${dport}
     echo
     echo "---------------------------"
